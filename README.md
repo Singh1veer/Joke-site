@@ -15,4 +15,4 @@ Node.js · Express.js · EJS · Axios · Bootstrap 5
 1. Clone the repo
 2. Run `npm install`
 3. Run `node index.js`
-# Open http://localhost:3000
+4. Open http://localhost:3000
