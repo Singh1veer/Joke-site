@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit</title>
+    <link rel="stylesheet" href="style.css">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+     <header class="stage">
+    <span class="mic-icon">✍️</span>
+    <h1>Submit a <span>Joke</span></h1>
+    <p class="subtitle">Make the world laugh</p>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="submit-card">
+    <form action="/submit" method="POST">
+      <div class="field">
+        <label>Type of Joke</label>
+        <div class="btn-group w-100">
+          <button type="button" class="btn btn-info dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
+            <span id="type-label">Select type</span>
+          </button>
+          <ul class="dropdown-menu w-100">
+            <li><a class="dropdown-item type-option" href="#" data-value="single">Single</a></li>
+            <li><a class="dropdown-item type-option" href="#" data-value="twopart">Two-Part</a></li>
+          </ul>
+        </div>
+        <input type="hidden" name="type" id="type-input" required>
+      </div>
+      <div class="field">
+        <label>Category</label>
+        <div class="btn-group w-100">
+          <button type="button" class="btn btn-info dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
+            <span id="category-label">Select category</span>
+          </button>
+          <ul class="dropdown-menu w-100">
+            <li><a class="dropdown-item cat-option" href="#" data-value="Misc">Misc</a></li>
+            <li><a class="dropdown-item cat-option" href="#" data-value="Programming">Programming</a></li>
+            <li><a class="dropdown-item cat-option" href="#" data-value="Dark">Dark</a></li>
+            <li><a class="dropdown-item cat-option" href="#" data-value="Pun">Pun</a></li>
+            <li><a class="dropdown-item cat-option" href="#" data-value="Spooky">Spooky</a></li>
+            <li><a class="dropdown-item cat-option" href="#" data-value="Christmas">Christmas</a></li>
+          </ul>
+        </div>
+        <input type="hidden" name="category" id="category-input" required>
+      </div>
+
+      <div class="field" id="single-field">
+        <label>Your Joke</label>
+        <textarea name="joke" rows="4" class="form-control" placeholder="Type your joke here..."></textarea>
+      </div>
+      <div class="field twopart-fields" id="twopart-fields">
+        <div class="field">
+          <label>Setup</label>
+          <textarea name="setup" rows="2" class="form-control" placeholder="Why did the chicken..."></textarea>
+        </div>
+        <div class="field">
+          <label>Delivery / Punchline</label>
+          <textarea name="delivery" rows="2" class="form-control" placeholder="To get to the other side!"></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">🎤 Submit Joke</button>
+     
+    </form>
+
+    <a href="/" class="back-link">← Back to jokes</a>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+ <script>
+    document.querySelectorAll('.type-option').forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          const val = this.dataset.value;
+          document.getElementById('type-input').value = val;
+          document.getElementById('type-label').textContent = val === 'single' ? 'Single' : 'Two-Part';
+          document.getElementById('single-field').style.display = val === 'single' ? 'block' : 'none';
+          document.getElementById('twopart-fields').classList.toggle('visible', val === 'twopart');
+        });
+      });
+
+      document.querySelectorAll('.cat-option').forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('category-input').value = this.dataset.value;
+          document.getElementById('category-label').textContent = this.dataset.value;
+        });
+      });
+async function submitJoke() {
+  const data = {
+    type: document.getElementById('type-input').value,
+    category: document.getElementById('category-input').value,
+    joke: document.querySelector('[name="joke"]')?.value,
+    setup: document.querySelector('[name="setup"]')?.value,
+    delivery: document.querySelector('[name="delivery"]')?.value,
+  };
+
+  try {
+    const res = await axios.post('/submit', data);
+    window.location.href = '/'; 
+  } catch (err) {
+    alert(err.response?.data?.error || 'Something went wrong!');
+  }
+}
+</script>
+</body>
+</html>

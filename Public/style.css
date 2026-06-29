@@ -163,9 +163,9 @@ body {
 
 .reveal-btn {
   text-decoration: none;
-  display: block;
+  display: inline-flex;
   text-align: center;
-  width: 100%;
+  width: 40%;
   margin-top: 22px;
   padding: 12px;
   background: linear-gradient(135deg, var(--amber), var(--amber-dim));
@@ -178,8 +178,87 @@ body {
   cursor: pointer;
   transition: opacity 0.2s, transform 0.15s;
 }
-
+.submit-btn {
+  text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
+  text-align: center;
+  width: 40%;
+  margin-top: 22px;
+  padding: 12px;
+  background: linear-gradient(135deg, var(--amber), var(--amber-dim));
+  color: #12121a;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
 .reveal-btn:hover { opacity: 0.88; transform: translateY(-1px); }
 .reveal-btn:active { transform: translateY(0); }
+.submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.submit-btn:active { transform: translateY(0); }
+.two-btn{
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+}
+    .submit-card {
+      width: 100%;
+      max-width: 520px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 36px 28px;
+      margin-top: 36px;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.4);
+    }
+    .submit-card label {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .submit-card .form-control,
+    .submit-card textarea {
+      background: var(--bg) !important;
+      border: 1px solid var(--border) !important;
+      color: var(--text) !important;
+      border-radius: 10px !important;
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      resize: vertical;
+    }
+    .submit-card .form-control:focus,
+    .submit-card textarea:focus {
+      border-color: var(--amber) !important;
+      box-shadow: 0 0 0 3px rgba(245,166,35,0.15) !important;
+    }
+    .submit-card .field { margin-bottom: 20px; }
+    .twopart-fields { display: none; }
+    .twopart-fields.visible { display: block; }
+    .back-link {
+      display: inline-block;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--amber); }
+    .selected-label {
+      color: var(--amber);
+      font-size: 0.8rem;
+      margin-top: 6px;
+    }
 
-.footer { margin-top: 52px; color: var(--border); font-size: 0.78rem; text-align: center; }
